@@ -6,6 +6,7 @@ Lander.y = 0
 Lander.rotation = math.rad(-90)
 Lander.velocityX = 0
 Lander.velocityY = 0
+Lander.speed = 1
 Lander.img = love.graphics.newImage("images/ship.png")
 Lander.img2 = love.graphics.newImage("images/engine.png")
 Lander.imgW = Lander.img:getWidth()
@@ -23,6 +24,11 @@ function input(dt)
   end
   if love.keyboard.isDown("up") then
     Lander.engineOn = true
+    
+    local forceX = math.cos(Lander.rotation) * (Lander.speed * dt)
+    local forceY = math.sin(Lander.rotation) * (Lander.speed * dt)
+    Lander.velocityX = Lander.velocityX + forceX
+    Lander.velocityY = Lander.velocityY + forceY
   else
     Lander.engineOn = false
   end
